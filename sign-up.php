@@ -9,17 +9,18 @@ include("./partials/header.php")
         <div class="message-alert">
             <p>This is an error message</p>
         </div>
-        <form action="">
-            <input type="text" placeholder="First name">
-            <input type="text" placeholder="Last name">
-            <input type="email" placeholder="email">
-            <input type="password" placeholder="password">
-            <input type="password" placeholder="confirm password">
+        <form action="signup_logic.php">
+            <input type="text" name="firstname" placeholder="First name">
+            <input type="text" name="lastname" placeholder="Last name">
+            <input type="text" name="username" placeholder="User name">
+            <input type="email" name="email" placeholder="email">
+            <input type="password" name="password" placeholder="password">
+            <input type="password" name="cpassword" placeholder="confirm password">
             <div class="form-control">
                 <label for="Upload-img" >Upload Profile Image</label>
-                <input type="file" name="" id="Upload-img">
+                <input type="file" name="profile-img" id="Upload-img">
             </div>
-            <button type="submit" class="btn">Sign Up</button>
+            <button type="submit" name="submit" class="btn">Sign Up</button>
             <small class="message-alert">Allready have an account? <a href="./sing-in.php">Sign in</a></small>
         </form>
     </div>

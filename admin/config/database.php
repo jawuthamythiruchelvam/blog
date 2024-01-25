@@ -1,4 +1,8 @@
 <?php
+require 'config/constants.php';
+?>
+
+<?php
 
     $servern="localhost";
     $user="root";

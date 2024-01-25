@@ -1,6 +1,4 @@
-<?php
-require 'config/constants.php';
-?>
+
  <footer>
     <div class="footer-social">
     <a href=""><i class="fab fa-facebook"></i></a>
