@@ -363,9 +363,11 @@ footer{
 }
 .message-alert-error{
     background: var(--color-danger-light);
+    margin-bottom: 1rem;
 }
 .message-alert-success{
     background: var(--color-success-light);
+    margin-bottom: 1rem;
 }
 .message-alert.lg{
     text-align: center;
@@ -523,7 +525,7 @@ margin-top: 8rem;
         display: flex;
         align-items: center;
         height:4.5rem;
-        box-shadow: 2rem 3rem 7rem rgbs(0,0,0,0.7);
+        box-shadow: 2rem 3rem 7rem rgba(0,0,0,0.7);
         animation: ANI 400ms 0s ease forwards;
         transform-origin:top ;
     }

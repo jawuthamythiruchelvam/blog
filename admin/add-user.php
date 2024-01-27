@@ -1,24 +1,48 @@
 <?php
-include("./partials/header.php")
+include("./partials/header.php");
+$firstname=$_SESSION['add-user_data']['firstname'] ?? null;
+$lastname=$_SESSION['add-user_data']['lastname'] ?? null;
+$username=$_SESSION['add-user_data']['username'] ?? null;
+$email=$_SESSION['add-user_data']['email'] ?? null;
+$password=$_SESSION['add-user_data']['password'] ?? null;
+$cpassword=$_SESSION['add-user_data']['cpassword'] ?? null;
+$avatar=$_SESSION['add-user_data']['avatar'] ?? null;
+$user_type=$_SESSION['add-user_data']['user_type'] ?? null;
+
 ?>
     
    <!-- sign-in-form -->
 <section class="form-section">
     <div class="container form-section-container">
         <h2>Add User</h2>
-        <div class="message-alert">
-            <p>This is an error message</p>
+        <?php if(isset($_SESSION['add-user-success'])){ ?>
+        <div class="message-alert-success">
+            <?= $_SESSION['add-user-success']; 
+             unset($_SESSION['add-user-success']);
+            ?>
+         </div>
+         <?php } ?>
+
+        <?php if(isset($_SESSION['add-user'])){?>
+        <div class="message-alert-error">
+            <p>
+                <?= $_SESSION['add-user'];
+                unset($_SESSION['add-user']);
+                ?>
+                
+            </p>
         </div>
-        <form action="" enctype="multipart/form-data">
+        <?php } ?>
+        <form action="<?= ROOT_URL?>/admin/add-user-logic.php" enctype="multipart/form-data" method='post'>
             
-            <input type="text" placeholder="First name">
-            <input type="text" placeholder="Last name">
-            <input type="text" placeholder="User name">
-            <input type="email" placeholder="email">
-            <input type="password" placeholder="password">
-            <input type="password" placeholder="confirm password">
+            <input type="text" name="firstname" value="<?= $firstname?>"placeholder="First name">
+            <input type="text" name="lastname" value="<?= $lastname?>"placeholder="Last name">
+            <input type="text" name="username" value="<?= $username?>" placeholder="User name">
+            <input type="email" name="email" value="<?= $email?>" placeholder="email">
+            <input type="password" name="password" value="<?= $password?>" placeholder="password">
+            <input type="password" name="cpassword" value="<?= $cpassword?>" placeholder="confirm password">
            
-           <select name="" id="">
+           <select name="user_type" id="user_type" value="<?= $user_type?>">
             <option value="0">Admin</option>
             <option value="1">Author</option>
             
@@ -26,11 +50,11 @@ include("./partials/header.php")
            
            <div class="form-control">
            <label for="profile-img" checked="">Add Profile image</label>
-           <input type="file" name="" id="profile-img">
+           <input type="file" name="avatar"value="<?= $avatar?>" id="avatar">
            </div>
-            <button type="submit" class="btn">Add User</button>
-            <small class="message-alert">Allready have an account? <a href="sign-in.php">Sign in</a></small>
-        
+            <button type="submit"  name="submit"class="btn">Add User</button>
+            <!-- <small class="message-alert">Allready have an account? <a href="sign-in.php">Sign in</a></small>
+         -->
         </form>
     </div>
 </section>

@@ -8,36 +8,41 @@ $username =filter_var($_POST['username'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $email =filter_var($_POST['email'],FILTER_SANITIZE_EMAIL);
 $password=filter_var($_POST['password'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $cpassword=filter_var($_POST['cpassword'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$propic=$_FILES['Upload-img'];
+$user_type=filter_var($_POST['user_type'],FILTER_SANITIZE_NUMBER_INT);
+$propic = $_FILES['avatar'];  
+
 
 if(empty($firstname)){
-    $_SESSION['signup']="please enter your first name";
+    $_SESSION['add-user']="please enter user first name";
 }
 elseif(empty($lastname)){
-    $_SESSION['signup']="please enter your last name";
+    $_SESSION['add-user']="please enter user last name";
 }
 elseif(empty($username)){
-    $_SESSION['signup']="please enter your user name";
+    $_SESSION['add-user']="please enter user user name";
 }
 elseif(empty($email)){
-    $_SESSION['signup']="please enter a valid email";
+    $_SESSION['add-user']="please enter a valid email";
 }
 elseif(strlen($password) < 8 || strlen($cpassword) < 8) {
-    $_SESSION['signup']="password should be 8+ characters";
+    $_SESSION['add-user']="password should be 8+ characters";
+}
+elseif(empty($user_type)){
+    $_SESSION['add-user']="please select the user type";
 }
 elseif(empty($propic)){
-    $_SESSION['signup']="please add profile pic";
+    $_SESSION['add-user']="please add profile pic";
 }
 else{
     if($cpassword!==$password){
-        $_SESSION['signup']="password do not mutch";
+        $_SESSION['add-user']="password do not mutch";
 
     }else{
         $hash_password=password_hash($cpassword,PASSWORD_DEFAULT);
         $user_email_check_query="SELECT * FROM users WHERE  username='$username' OR email='$email'";
         $user_result=mysqli_query($conn,$user_email_check_query);
         if(mysqli_num_rows($user_result)>0){
-            $_SESSION['signup']="Username or email already exist";
+            $_SESSION['add-user']="Username or email already exist";
         }
         else{
             $time=time();
@@ -54,35 +59,35 @@ else{
 
 
                 }else{
-                    $_SESSION['signup']="file size is too big should be less than 1mb";
+                    $_SESSION['add-user']="file size is too big should be less than 1mb";
                 }
             }else{
-                $_SESSION['signup']="file should be png,jpg,jpeg";
+                $_SESSION['add-user']="File should be png , jpg , jpeg";
             }
         }
     }
 }
-if(!empty($_SESSION['signup'])){
+if(!empty($_SESSION['add-user'])){
     //pass the incorrect date to sign up page again
-    $_SESSION['signup_data']=$_POST;
-    header('location:'.ROOT_URL.'sign-up.php');
+    $_SESSION['add-user_data']=$_POST;
+    header('location:'.ROOT_URL.'admin/add-user.php');
     die();
 }else{
-   $insert_user_query="INSERT INTO users (firstname,lastname,username,email,password,avatar,is_admin) VALUES ('$firstname','$lastname','$username','$email','$hash_password','$avatar_name',0)" ;
+   $insert_user_query="INSERT INTO users (firstname,lastname,username,email,password,avatar,is_admin) VALUES ('$firstname','$lastname','$username','$email','$hash_password','$avatar_name','$user_type')";
 
    if (mysqli_query($conn, $insert_user_query)) {
-    $_SESSION['signup-success'] = "Registration successful. Please log in";
-    header('location: ' . ROOT_URL . 'sing-in.php');
+    $_SESSION['add-user-success'] = " New user $firstname $lastname  added successfully.";
+    header('location: ' . ROOT_URL . 'admin/add-user.php');
     die();
 } else {
-    $_SESSION['signup'] = "Error: " . mysqli_error($conn);
-    header('location: ' . ROOT_URL . 'sing-up.php');
+    $_SESSION['add-user'] = "Error: " . mysqli_error($conn);
+    header('location: ' . ROOT_URL . 'admin/add-user.php');
     die();
 }
 }
 }
 else{
-header('location:'.ROOT_URL.'sing-up.php');
+header('location:'.ROOT_URL.'admin/add-user.php');
 die();
 
 }

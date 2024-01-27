@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("./partials/header.php")
 ?>
     
@@ -19,6 +20,7 @@ include("./partials/header.php")
                             <h5>Manage Post</h5>
                         </a>
                     </li>
+                    <?php if(isset($_SESSION['user_is_admin'])){?>
                     <li>
                         <a href="add-user.php">
                             <i class="fa fa-user-plus"></i>
@@ -31,6 +33,7 @@ include("./partials/header.php")
                             <h5>Manage User</h5>
                         </a>
                     </li>
+                   
                     <li>
                         <a href="add-category.php">
                             <i class="fa fa-mobile"></i>
@@ -43,6 +46,7 @@ include("./partials/header.php")
                             <h5>Manege Category</h5>
                         </a>
                     </li>
+                    <?PHP }?>
                 </ul>
             </aside>
     <main>

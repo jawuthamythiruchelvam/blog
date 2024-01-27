@@ -1,5 +1,6 @@
 <?php
 require 'config/database.php';
+session_start();
 ?>
 
 
@@ -25,9 +26,10 @@ require 'config/database.php';
                 <li><a href="../contact.php">contact</a></li>
                 <li><a href="../sing-in.php">Sing In</a></li>
                 <li>
+                    <?php if(isset($_SESSION['user-id'])){?>
                     <div class="nav-profile">
                         <div class="profile-img">
-                            <img src="../images/download.png" alt="">
+                        <img src="<?= ROOT_URL. 'images/'. $_SESSION['avatar'];?>" alt="">
                         </div>
                    
                         <ul>
@@ -36,6 +38,7 @@ require 'config/database.php';
                         </ul>
                         
                  </div>
+                 <?php }?>
                 </li>
             </ul>
             <button class="phone-button open"><i class="fa fa-bars"></i></button>
