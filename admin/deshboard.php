@@ -1,9 +1,33 @@
 <?php
-session_start();
-include("./partials/header.php")
+
+include("./partials/header.php");
+$user_id=$_SESSION['user-id'];
+$blog_query="SELECT * FROM posts where author_id='$user_id'";
+$blog_result=mysqli_query($conn,$blog_query);
 ?>
     
     <section class="Deshboard">
+    <?php if(isset($_SESSION['add-post-success'])){ ?>
+        <div class="message-alert-success">
+            <?= $_SESSION['add-post-success']; 
+             unset($_SESSION['add-post-success']);
+            ?>
+         </div>
+         <?php } ?>
+         <?php if(isset($_SESSION['edit-post-success'])){ ?>
+        <div class="message-alert-success">
+            <?= $_SESSION['edit-post-success']; 
+             unset($_SESSION['edit-post-success']);
+            ?>
+         </div>
+         <?php } ?>
+         <?php if(isset($_SESSION['delete-post'])){ ?>
+        <div class="message-alert-success">
+            <?= $_SESSION['delete-post']; 
+             unset($_SESSION['delete-post']);
+            ?>
+         </div>
+         <?php } ?>
         <div class="container deshboard-container">
             <aside>
                 <ul>
@@ -15,7 +39,7 @@ include("./partials/header.php")
                         </a>
                     </li>
                     <li>
-                        <a href="dashboard.php" class="active">
+                        <a href="deshboard.php" class="active">
                             <i class="fa fa-pen"></i>
                             <h5>Manage Post</h5>
                         </a>
@@ -61,41 +85,22 @@ include("./partials/header.php")
             </tr>
         </thead>
         <tbody>
+        <?php 
+        while($blog= mysqli_fetch_assoc($blog_result)){
+            $category_id=$blog['category_id'];
+            $category_query="SELECT * FROM categories where id='$category_id'";
+            $category_result=mysqli_query($conn,$category_query);
+            $category= mysqli_fetch_assoc($category_result)
+            ?>
+                
             <tr>
-                <td>lipsum</td>
-                <td>Discovery</td>
+            <td><?= $blog['title'];?></td>
+            <td><?= $category['title'];?></td>
                
-                <td><a href="edit-post.php" class="btn sm">Edit</a></td>
-                <td><a href="delete-post.php" class="btn sm danger">Delete</a></td>
+            <td><a href="<?=ROOT_URL?>admin/edit-post.php?id=<?= $blog['id']?>" class="btn sm">Edit</a></td>
+            <td><a href="<?=ROOT_URL?>admin/delete-post.php?id=<?= $blog['id']?>" class="btn sm danger">Delete</a></td>
             </tr>
-            <tr>
-                <td>lipsum</td>
-                <td>Discovery</td>
-               
-                <td><a href="edit-post.php" class="btn sm">Edit</a></td>
-                <td><a href="delete-post.php" class="btn sm danger">Delete</a></td>
-            </tr>
-            <tr>
-                <td>lipsum</td>
-                <td>Discovery</td>
-               
-                <td><a href="edit-post.php" class="btn sm">Edit</a></td>
-                <td><a href="delete-post.php" class="btn sm danger">Delete</a></td>
-            </tr>
-            <tr>
-                <td>lipsum</td>
-                <td>Discovery</td>
-               
-                <td><a href="edit-post.php" class="btn sm">Edit</a></td>
-                <td><a href="delete-post.php" class="btn sm danger">Delete</a></td>
-            </tr>
-            <tr>
-                <td>lipsum</td>
-                <td>Discovery</td>
-               
-                <td><a href="edit-post.php" class="btn sm">Edit</a></td>
-                <td><a href="delete-post.php" class="btn sm danger">Delete</a></td>
-            </tr>
+            <?php }?>
             
         </tbody>
        </table>

@@ -1,8 +1,34 @@
 <?php
-include("./partials/header.php")
+include("./partials/header.php");
+
+//$user_id= $_SESSION["user-id"];
+$blog_query="SELECT * FROM categories WHERE NOT id=9";
+$blog_result=mysqli_query($conn,$blog_query);
 ?>
     <section class="Deshboard">
+    <?php if(isset($_SESSION['add-category-success'])){ ?>
+        <div class="message-alert-success">
+            <?= $_SESSION['add-category-success']; 
+             unset($_SESSION['add-category-success']);
+            ?>
+         </div>
+         <?php } ?>
+         <?php if(isset($_SESSION['delete-category'])){ ?>
+        <div class="message-alert-success">
+            <?= $_SESSION['delete-category']; 
+             unset($_SESSION['delete-category']);
+            ?>
+         </div>
+         <?php } ?>
+         <?php if(isset($_SESSION['edit-category-success'])) : ?>
+            <div class="message-alert-success">
+                <?= $_SESSION['edit-category-success']; ?>
+                <?php unset($_SESSION['edit-category-success']); ?>
+            </div>
+        <?php endif; ?>
         <div class="container deshboard-container">
+            
+           
             <aside>
                 <ul>
                     <li>
@@ -13,7 +39,7 @@ include("./partials/header.php")
                         </a>
                     </li>
                     <li>
-                        <a href="dashboard.php">
+                        <a href="deshboard.php">
                             <i class="fa fa-pen"></i>
                             <h5>Manage Post</h5>
                         </a>
@@ -55,36 +81,17 @@ include("./partials/header.php")
             </tr>
         </thead>
         <tbody>
+            
+            <?php while($blog= mysqli_fetch_assoc($blog_result)){
+               
+                ?>
             <tr>
-                <td>Discovery</td>
-                <td><a href="edit-category.php" class="btn sm">Edit</a></td>
-                <td><a href="delete-category.php" class="btn sm danger">Delete</a></td>
+            <td><?= $blog['title'];?></td>
+                <td><a href="<?=ROOT_URL?>admin/edit-category.php?id=<?= $blog['id']?>" class="btn sm">Edit</a></td>
+                <td><a href="<?=ROOT_URL?>admin/delete-category.php?id=<?= $blog['id']?>" class="btn sm danger">Delete</a></td>
             </tr>
-            <tr>
-                <td>Discovery</td>
-                <td><a href="edit-category.php" class="btn sm">Edit</a></td>
-                <td><a href="delete-category.php" class="btn sm danger">Delete</a></td>
-            </tr>
-            <tr>
-                <td>Discovery</td>
-                <td><a href="edit-category.php" class="btn sm">Edit</a></td>
-                <td><a href="delete-category.php" class="btn sm danger">Delete</a></td>
-            </tr>
-            <tr>
-                <td>Discovery</td>
-                <td><a href="edit-category.php" class="btn sm">Edit</a></td>
-                <td><a href="delete-category.php" class="btn sm danger">Delete</a></td>
-            </tr>
-            <tr>
-                <td>Discovery</td>
-                <td><a href="edit-category.php" class="btn sm">Edit</a></td>
-                <td><a href="delete-category.php" class="btn sm danger">Delete</a></td>
-            </tr>
-            <tr>
-                <td>Discovery</td>
-                <td><a href="edit-category.php" class="btn sm">Edit</a></td>
-                <td><a href="delete-category.php" class="btn sm danger">Delete</a></td>
-            </tr>
+            <?php }?>
+
         </tbody>
        </table>
     </main>

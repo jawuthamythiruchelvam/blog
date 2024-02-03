@@ -8,6 +8,6 @@ document.querySelector(".close").addEventListener('click',()=>{
     document.querySelector('.open').style.display='inline-block'
     document.querySelector('.close').style.display='none'
 })
-document.querySelector('.inline').addEventListener('click',() =>{
-    document.querySelector('.inline input').classList.toggle('red')
+document.querySelector('.inline input[type="checkbox"]').addEventListener('click',() =>{
+    document.querySelector('.inline input[type="checkbox"]').classList.toggle('red')
 })

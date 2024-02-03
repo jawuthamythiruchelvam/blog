@@ -1,13 +1,13 @@
 <?php
 include("./partials/header.php");
-$firstname=$_SESSION['add-user_data']['firstname'] ?? null;
-$lastname=$_SESSION['add-user_data']['lastname'] ?? null;
-$username=$_SESSION['add-user_data']['username'] ?? null;
-$email=$_SESSION['add-user_data']['email'] ?? null;
-$password=$_SESSION['add-user_data']['password'] ?? null;
-$cpassword=$_SESSION['add-user_data']['cpassword'] ?? null;
-$avatar=$_SESSION['add-user_data']['avatar'] ?? null;
-$user_type=$_SESSION['add-user_data']['user_type'] ?? null;
+$firstname=$_SESSION['add-user-data']['firstname'] ?? null;
+$lastname=$_SESSION['add-user-data']['lastname'] ?? null;
+$username=$_SESSION['add-user-data']['username'] ?? null;
+$email=$_SESSION['add-user-data']['email'] ?? null;
+$password=$_SESSION['add-user-data']['password'] ?? null;
+$cpassword=$_SESSION['add-user-data']['cpassword'] ?? null;
+$avatar=$_SESSION['add-user-data']['avatar'] ?? null;
+$user_type=$_SESSION['add-user-data']['user_type'] ?? null;
 
 ?>
     
@@ -33,7 +33,7 @@ $user_type=$_SESSION['add-user_data']['user_type'] ?? null;
             </p>
         </div>
         <?php } ?>
-        <form action="<?= ROOT_URL?>/admin/add-user-logic.php" enctype="multipart/form-data" method='post'>
+        <form action="<?= ROOT_URL?>/admin/add-user-logic.php" enctype="multipart/form-data" method='POST'>
             
             <input type="text" name="firstname" value="<?= $firstname?>"placeholder="First name">
             <input type="text" name="lastname" value="<?= $lastname?>"placeholder="Last name">
@@ -42,17 +42,20 @@ $user_type=$_SESSION['add-user_data']['user_type'] ?? null;
             <input type="password" name="password" value="<?= $password?>" placeholder="password">
             <input type="password" name="cpassword" value="<?= $cpassword?>" placeholder="confirm password">
            
-           <select name="user_type" id="user_type" value="<?= $user_type?>">
+           <!-- <select name="user_type" id="user_type">
             <option value="0">Admin</option>
-            <option value="1">Author</option>
-            
-           </select>
+            <option value="1">Author</option> -->
+            <select  name="user_type" id="user_type">
+            <option value="1" <?php echo $user_type == 1 ? 'selected' : ''; ?>>Admin</option>
+            <option value="0" <?php echo $user_type == 0 ? 'selected' : ''; ?>>Author</option>
+            </select>
            
            <div class="form-control">
            <label for="profile-img" checked="">Add Profile image</label>
-           <input type="file" name="avatar"value="<?= $avatar?>" id="avatar">
+           <input type="file" name="avatar"value="<?= $avatar["name"]?>" id="avatar">
            </div>
             <button type="submit"  name="submit"class="btn">Add User</button>
+            
             <!-- <small class="message-alert">Allready have an account? <a href="sign-in.php">Sign in</a></small>
          -->
         </form>
