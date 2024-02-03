@@ -9,6 +9,11 @@ if(isset($_GET['id'])){
 }
 
 if(mysqli_num_rows($category_results)==1){
+    $avatar_name=$category['thumbnail'];
+$avatar_path="../images/".$avatar_name;
+if($avatar_path){
+    unlink($avatar_path);
+}
     $delete_category_query="DELETE FROM posts WHERE id=$id";
     $delete_category_results=mysqli_query($conn,$delete_category_query);
     if(mysqli_errno($conn)){

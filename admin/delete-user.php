@@ -10,7 +10,7 @@ if(isset($_GET['id'])){
 
 if(mysqli_num_rows($user_result)==1){
 $avatar_name=$user['avatar'];
-$avatar_path="../image/".$avatar_name;
+$avatar_path="../images/".$avatar_name;
 if($avatar_path){
     unlink($avatar_path);
 }
@@ -23,6 +23,7 @@ if(mysqli_errno($conn)){
 }else{
     //$_SESSION['delete-user']=" User '{$user['firstname]} '{$user['lastname']}' deleted successfully";
     $_SESSION['delete-user'] = "User '{$user['firstname']}' '{$user['lastname']}' deleted successfully";
-
+    header('location:'.ROOT_URL.'admin/manage-user.php');
+    die();
 }
 ?>
