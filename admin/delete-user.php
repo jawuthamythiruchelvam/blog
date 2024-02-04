@@ -7,6 +7,8 @@ if(isset($_GET['id'])){
     $user_result=mysqli_query($conn,$query);
     $user=mysqli_fetch_assoc($user_result);
 }
+$update_query="Update posts SET author_id=33 where author_id=$id";
+$update_reslut=mysqli_query($conn,$update_query);
 
 if(mysqli_num_rows($user_result)==1){
 $avatar_name=$user['avatar'];
@@ -22,7 +24,7 @@ if(mysqli_errno($conn)){
     $_SESSION['delete-user']="couldn't delete user";
 }else{
     //$_SESSION['delete-user']=" User '{$user['firstname]} '{$user['lastname']}' deleted successfully";
-    $_SESSION['delete-user'] = "User '{$user['firstname']}' '{$user['lastname']}' deleted successfully";
+    $_SESSION['delete-user'] = "User '{$user['firstname']}'.' ' . '{$user['lastname']}' deleted successfully";
     header('location:'.ROOT_URL.'admin/manage-user.php');
     die();
 }

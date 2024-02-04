@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include("./partials/header.php");
 $firstname=$_SESSION['signup_data']['firstname'] ?? null;
 $lastname=$_SESSION['signup_data']['lastname'] ?? null;

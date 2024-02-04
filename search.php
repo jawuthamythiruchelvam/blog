@@ -1,25 +1,16 @@
 <?php
 include("./partials/header.php");
 require 'config/database.php';
-if(isset($_GET['id'])){
-    $id=$_GET['id'];
-    $query="SELECT * FROM posts where category_id='$id'";
-    $post_result=mysqli_query($conn,$query);
-    $cquery="SELECT * FROM categories where id='$id'";
-    $c_result=mysqli_query($conn,$cquery);
-    $category_title=mysqli_fetch_assoc($c_result);
-}
 ?>
-<!-- category-page-titles -->
-<section class="category-title">
-    <h2><?= $category_title['title']?></h2>
-</section>
-
-<!-- post start -->
 <section class="post">
-    <div class="post-container container">
-       <?php while( $post=mysqli_fetch_assoc($post_result)) {
-        $post_id=$post['id'];
+<div class="post-container container">
+<?php
+if(isset($_POST['search'] ) && isset($_POST['submit'])){
+$search=filter_var($_POST['search'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$QUERY="SELECT * FROM posts WHERE title LIKE '%$search%' ORDER BY date_time DESC";
+$QUERY_RESULT=mysqli_query($conn,$QUERY);
+while($post=mysqli_fetch_assoc($QUERY_RESULT)){
+    $post_id=$post['id'];
     $puser_id=$post['author_id'];
     $pcategory_id=$post['category_id'];
     $pcategory_query="SELECT * FROM categories WHERE id='$pcategory_id'";
@@ -49,31 +40,14 @@ if(isset($_GET['id'])){
 </div>
 </article>
 <?php }?>
-
 </div>
-    </div>
+    
 </section>
-<!-- post end -->
-<!-- category start -->
-<section class="category">
-    <div class="category-container container">
-    <?Php $category_btn_query="SELECT * FROM categories";
-    $category_btn_result=mysqli_query($conn,$category_btn_query);
-    while($category_btn=mysqli_fetch_assoc($category_btn_result)){
-    ?>
-   
-        <a href="<?=ROOT_URL?>category.php?id=<?=$category_btn['id']?>" class="category-btn"><?= $category_btn['title']?></a>
-        <?php }?>
-    </div>
-</section>
-<!-- category end -->
-<!-- footer-start -->
+
 <?php
-include("./partials/footer.php")
+ }else{
+    header('location: '. ROOT_URL.'blog.php');
+    die();
+}
+
 ?>
-<!-- footer-end -->
-
-
-    <script src="main.js"></script>
-</body>
-</html>

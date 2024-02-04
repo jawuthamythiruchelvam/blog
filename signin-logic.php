@@ -26,7 +26,8 @@ if(isset($_POST['submit'])){
                 
                 }
                 else {
-                    header('location:'.ROOT_URL.'admin/deshboard.php');
+                    $_SESSION['user_is_admin'] = false;
+                    header('location:'.ROOT_URL.'index.php');
                 }
             }else{
                 $_SESSION['signin']="password incorrect";

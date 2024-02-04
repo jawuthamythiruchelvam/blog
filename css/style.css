@@ -612,6 +612,9 @@ margin-top: 8rem;
     .Deshboard table th{
         display: none;
     }
+    .Deshboard table td{
+        color:black;
+    }
     
 }
 .singele-post{

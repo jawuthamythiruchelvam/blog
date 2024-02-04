@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include("./partials/header.php");
 require 'config/database.php';
 $featured_query="SELECT * FROM posts ORDER BY RAND() LIMIT 1";

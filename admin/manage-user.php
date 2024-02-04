@@ -2,7 +2,7 @@
 
 include("./partials/header.php");
 $user_id= $_SESSION["user-id"];
-$user_query="SELECT * FROM users WHERE  NOT id='$user_id'";
+$user_query="SELECT * FROM users WHERE  NOT id='$user_id' and NOT id=33";
 $user_result=mysqli_query($conn,$user_query);
 ?>
     

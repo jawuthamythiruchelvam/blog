@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include("./partials/header.php");
 $username_email=$_SESSION['signin_data']['username_email'] ?? null;
 $password=$_SESSION['signin_data']['password'] ?? null;

@@ -1,5 +1,5 @@
 <?php
-
+require 'config/database.php';
 include("./partials/header.php");
 $user_id=$_SESSION['user-id'];
 $blog_query="SELECT * FROM posts where author_id='$user_id'";
@@ -44,7 +44,7 @@ $blog_result=mysqli_query($conn,$blog_query);
                             <h5>Manage Post</h5>
                         </a>
                     </li>
-                    <?php if(isset($_SESSION['user_is_admin'])){?>
+                    <?php if($_SESSION['user_is_admin']){?>
                     <li>
                         <a href="add-user.php">
                             <i class="fa fa-user-plus"></i>

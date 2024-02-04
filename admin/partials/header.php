@@ -1,6 +1,7 @@
 <?php
-require 'config/database.php';
 session_start();
+require 'config/database.php';
+
 ?>
 
 
@@ -17,14 +18,14 @@ session_start();
 
     <nav>
         <div class="container nav-container">
-            <a href="../index.php" class="logo" ><h3>Code with <span> Beg</span></h3></a> 
+            <a href="../index.php" class="logo" ><h3>Code for <span> Blog</span></h3></a> 
             <ul class="nav-link">
-                <li><a href="../index.php">Home</a></li>
-                <li><a href="../blog.php">Blog</a></li>
-                <li><a href="../about.php">About</a></li>
-                <li><a href="../services.php">Services</a></li>
-                <li><a href="../contact.php">contact</a></li>
-                <li><a href="../sing-in.php">Sing In</a></li>
+                <li><a href="<?= ROOT_URL?>./index.php">Home</a></li>
+                <li><a href="<?= ROOT_URL?>./blog.php">Blog</a></li>
+                <li><a href="<?= ROOT_URL?>./about.php">About</a></li>
+                <li><a href="<?= ROOT_URL?>./services.php">Services</a></li>
+                <li><a href="<?= ROOT_URL?>./contact.php">contact</a></li>
+                <li><a href="<?= ROOT_URL?>./sing-in.php">Sing In</a></li>
                 <li>
                     <?php if(isset($_SESSION['user-id'])){?>
                     <div class="nav-profile">

@@ -1,6 +1,7 @@
 <?php
-require 'config/constants.php';
-if(isset($_SESSION['user-id']))
+session_start();
+require 'config/database.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,7 @@ if(isset($_SESSION['user-id']))
 
     <nav>
         <div class="container nav-container">
-            <a href="./index.php" class="logo" ><h3>Code with <span> Beg</span></h3></a> 
+            <a href="./index.php" class="logo" ><h3>Code for <span> Blog</span></h3></a> 
             <ul class="nav-link">
                 <li><a href="<?= ROOT_URL?>./index.php">Home</a></li>
                 <li><a href="<?= ROOT_URL?>./blog.php">Blog</a></li>
