@@ -31,7 +31,7 @@ elseif(strlen($password) < 8 || strlen($cpassword) < 8) {
 elseif(empty($propic["name"])){
     $_SESSION['add-user']="please add profile pic";
 }
-elseif(empty($user_type)){
+elseif(!isset($user_type)){
         $_SESSION['add-user']="please select the user type";
     }
 else{

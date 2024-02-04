@@ -1,5 +1,6 @@
 <?php
-include("./partials/header.php")
+session_start();
+include("./partials/header.php");
 ?>
     
     <section class="empty-page">
